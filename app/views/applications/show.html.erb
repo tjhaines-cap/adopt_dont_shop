@@ -5,4 +5,11 @@
   <% @application.pets.each do |pet| %>
     <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
   <% end %>
+  <% if @application.status == "In Progress" %>
+    <p>Add a Pet to this Application</p>
+    <%= form_tag("/pets(.:format)", method: :get) do %>
+      <%= text_field_tag(:add_pet, params[:add_pet]) %>
+      <%= submit_tag ("Add Pet") %>
+    <% end %>
+  <% end %> 
 
