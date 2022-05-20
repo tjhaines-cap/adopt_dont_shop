@@ -31,4 +31,20 @@ RSpec.describe 'Applications Show Page' do
     click_link 'Sasha'
     expect(current_path).to eq("/pets/#{sasha.id}")
   end
+
+  it 'has section to add pet on in progress application' do
+    application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111', description: 'I like animals!', status: 'In Progress')
+    application2 = Application.create!(name: 'Sage', address: '42 Wind Avenue, Denver, CO, 80111', description: 'Happy home', status: 'Pending')
+
+    visit "/applications/#{application.id}"
+
+    expect(page).to have_content("Add a Pet to this Application")
+    
+    click_link "Submit"
+    expect(current_path).to eq("/applications/#{application.id}")
+
+    visit "/applications/#{application2.id}"
+
+    expect(page).to_not have_content("Add a Pet to this Application")
+  end
 end
