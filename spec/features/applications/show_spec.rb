@@ -37,7 +37,7 @@ RSpec.describe 'Applications Show Page' do
     application2 = Application.create!(name: 'Sage', address: '42 Wind Avenue, Denver, CO, 80111', description: 'Happy home', status: 'Pending')
 
     visit "/applications/#{application.id}"
-    save_and_open_page
+    # save_and_open_page
     expect(page).to have_content("Add a Pet to this Application")
     
     click_button"Add Pet"
