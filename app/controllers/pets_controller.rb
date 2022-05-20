@@ -1,7 +1,12 @@
 class PetsController < ApplicationController
   def index
+    # binding.pry
     if params[:search].present?
       @pets = Pet.search(params[:search])
+      if params[:redirect]
+        # binding.pry
+        redirect_to "/applications/#{params[:redirect][:application_id]}"
+      end
     else
       @pets = Pet.adoptable
     end

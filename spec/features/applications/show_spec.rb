@@ -35,9 +35,12 @@ RSpec.describe 'Applications Show Page' do
   it 'has section to add pet on in progress application' do
     application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111', description: 'I like animals!', status: 'In Progress')
     application2 = Application.create!(name: 'Sage', address: '42 Wind Avenue, Denver, CO, 80111', description: 'Happy home', status: 'Pending')
+    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
 
     visit "/applications/#{application.id}"
     # save_and_open_page
+    fill_in 'search', with: pet_2.name 
     expect(page).to have_content("Add a Pet to this Application")
     
     click_button"Add Pet"
