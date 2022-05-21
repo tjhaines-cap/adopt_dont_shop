@@ -39,6 +39,5 @@ Rails.application.routes.draw do
 
   get '/applications/:application_id', to: 'applications#show'
   get '/applications', to: 'applications#index'
-  # get '/applications(.:format)', to: 'applications#show'
   
 end

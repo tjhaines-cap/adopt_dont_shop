@@ -46,7 +46,7 @@ RSpec.describe 'Applications Show Page' do
     click_button"Find Pet"
     expect(current_path).to eq("/applications/#{application.id}")
     expect(page).to have_content(pet_2.name)
-  
+    save_and_open_page
     visit "/applications/#{application2.id}"
     # save_and_open_page
     expect(page).to_not have_content("Add a Pet to this Application")

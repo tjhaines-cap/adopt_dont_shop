@@ -12,5 +12,11 @@
       <%= hidden_field(:redirect, :application_id, :value => @application.id) %>
       <%= submit_tag ("Find Pet") %>
     <% end %>
+
+    <% if @pets %>
+      <% @pets.each do |pet| %>
+        <p><%= pet.name %></p>
+      <% end %>
+    <% end %>
   <% end %> 
 
