@@ -5,4 +5,22 @@
   <% @application.pets.each do |pet| %>
     <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
   <% end %>
+  <% if @application.status == "In Progress" %>
+    <p>Add a Pet to this Application</p>
+    <p>Enter a name to search</p>
+    <%= form_tag("/applications/#{@application.id}", method: :get) do %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag ("Find Pets") %>
+    <% end %>
+
+    <% if @pets %>
+      <% @pets.each do |pet| %>
+        <h3><%= pet.name %></h3>
+        <p><%= pet.age %> years old</p>
+        <p><%= pet.breed %></p>
+        <p><%= pet.adoptable %></p>
+        <p><%= pet.shelter_name %></p>
+      <% end %>
+    <% end %>
+  <% end %> 
 
