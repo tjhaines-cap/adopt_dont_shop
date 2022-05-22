@@ -16,7 +16,11 @@
 
     <% if @pets %>
       <% @pets.each do |pet| %>
-        <p><%= pet.name %></p>
+        <h3><%= pet.name %></h3>
+        <p><%= pet.age %> years old</p>
+        <p><%= pet.breed %></p>
+        <p><%= pet.adoptable %></p>
+        <p><%= pet.shelter_name %></p>
       <% end %>
     <% end %>
   <% end %> 
