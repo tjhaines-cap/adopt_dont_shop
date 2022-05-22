@@ -37,18 +37,29 @@ RSpec.describe 'Applications Show Page' do
     application2 = Application.create!(name: 'Sage', address: '42 Wind Avenue, Denver, CO, 80111', description: 'Happy home', status: 'Pending')
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
+    pet_3 = Pet.create(adoptable: true, age: 2, breed: 'labrador', name: 'Lobster', shelter_id: shelter.id)
+    pet_4 = Pet.create(adoptable: true, age: 1, breed: 'chihuahua', name: 'Tiny', shelter_id: shelter.id)
 
     visit "/applications/#{application.id}"
-    # save_and_open_page
     fill_in 'search', with: pet_2.name 
     expect(page).to have_content("Add a Pet to this Application")
-    
-    click_button"Find Pet"
+
+    click_button"Find Pets"
     expect(current_path).to eq("/applications/#{application.id}")
+    
     expect(page).to have_content(pet_2.name)
-    # save_and_open_page
+    expect(page).to have_content(pet_2.age)
+    expect(page).to have_content(pet_2.adoptable)
+    expect(page).to have_content(pet_2.breed)
+    expect(page).to have_content(pet_2.shelter_name)
+  
+    expect(page).to have_content(pet_3.name)
+    expect(page).to have_content(pet_3.age)
+    expect(page).to have_content(pet_3.adoptable)
+    expect(page).to have_content(pet_3.breed)
+    expect(page).to have_content(pet_3.shelter_name)
+  
     visit "/applications/#{application2.id}"
-    # save_and_open_page
     expect(page).to_not have_content("Add a Pet to this Application")
   end
 end

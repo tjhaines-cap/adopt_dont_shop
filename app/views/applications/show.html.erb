@@ -7,10 +7,11 @@
   <% end %>
   <% if @application.status == "In Progress" %>
     <p>Add a Pet to this Application</p>
+    <p>Enter a name to search</p>
     <%= form_tag("/applications/#{@application.id}", method: :get) do %>
       <%= text_field_tag(:search, params[:search]) %>
       <%= hidden_field(:redirect, :application_id, :value => @application.id) %>
-      <%= submit_tag ("Find Pet") %>
+      <%= submit_tag ("Find Pets") %>
     <% end %>
 
     <% if @pets %>
