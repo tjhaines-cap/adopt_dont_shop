@@ -9,7 +9,7 @@ RSpec.describe 'Applications New Page' do
     fill_in 'City', with: "Denver"
     fill_in 'State', with: "CO"
     fill_in 'Zip Code', with: "80111"
-    fill_in 'Why you would make a good home?', with: 'Lots of love!'
+    fill_in 'Why would you make a good home?', with: 'Lots of love!'
     click_on("Submit")
 
     expect(page).to have_content('Sage')

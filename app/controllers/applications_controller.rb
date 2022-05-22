@@ -9,4 +9,8 @@ class ApplicationsController < ApplicationController
 
   def new
   end
+
+  def create
+    Application.create(name: params[:name])
+  end
 end
