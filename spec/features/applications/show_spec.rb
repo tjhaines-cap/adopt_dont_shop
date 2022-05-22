@@ -32,7 +32,7 @@ RSpec.describe 'Applications Show Page' do
     expect(current_path).to eq("/pets/#{sasha.id}")
   end
 
-  it 'has section to add pet on in progress application' do
+  it 'has section to search for pet on in progress application' do
     application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111', description: 'I like animals!', status: 'In Progress')
     application2 = Application.create!(name: 'Sage', address: '42 Wind Avenue, Denver, CO, 80111', description: 'Happy home', status: 'Pending')
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
@@ -41,9 +41,9 @@ RSpec.describe 'Applications Show Page' do
     pet_4 = Pet.create(adoptable: true, age: 1, breed: 'chihuahua', name: 'Tiny', shelter_id: shelter.id)
 
     visit "/applications/#{application.id}"
-    fill_in 'search', with: pet_2.name 
     expect(page).to have_content("Add a Pet to this Application")
-
+    
+    fill_in 'search', with: pet_2.name 
     click_button"Find Pets"
     expect(current_path).to eq("/applications/#{application.id}")
     
@@ -52,12 +52,22 @@ RSpec.describe 'Applications Show Page' do
     expect(page).to have_content(pet_2.adoptable)
     expect(page).to have_content(pet_2.breed)
     expect(page).to have_content(pet_2.shelter_name)
-  
+    
     expect(page).to have_content(pet_3.name)
     expect(page).to have_content(pet_3.age)
     expect(page).to have_content(pet_3.adoptable)
     expect(page).to have_content(pet_3.breed)
     expect(page).to have_content(pet_3.shelter_name)
+    
+    expect(page).to have_content("Add a Pet to this Application")
+    fill_in 'search', with: "Max" 
+    click_button"Find Pets"
+    expect(page).to_not have_content("Max")
+    expect(page).to_not have_content(pet_2.name)
+    expect(page).to_not have_content(pet_3.name)
+    expect(page).to_not have_content(pet_4.name)
+    
+    expect(current_path).to eq("/applications/#{application.id}")
   
     visit "/applications/#{application2.id}"
     expect(page).to_not have_content("Add a Pet to this Application")
