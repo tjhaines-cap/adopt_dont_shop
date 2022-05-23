@@ -11,7 +11,9 @@ RSpec.describe 'Applications New Page' do
     fill_in 'Zip Code', with: "80111"
     fill_in 'Why would you make a good home?', with: 'Lots of love!'
     click_on("Submit")
-
+    
+    application_id = Application.last.id
+    expect(current_path).to eq("applications/#{application_id}")
     expect(page).to have_content('Sage')
     expect(page).to have_content('42 Wind Avenue, Denver, CO, 80111')
     expect(page).to have_content('In Progress')

@@ -11,12 +11,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    Application.create(artist_params)
+    require "pry"; binding.pry
+    Application.create!(application_params)
     redirect_to '/applications'
   end
 
   private
-  def artist_params
+  def application_params
     params.permit(:name, :address, :description, :status)
   end
 end
