@@ -25,8 +25,8 @@ RSpec.describe Application, type: :model do
       ApplicationPet.create!(pet: max, application: application)
       ApplicationPet.create!(pet: sasha, application: application)
       ApplicationPet.create!(pet: sasha, application: application2)
-      expect(application.pets).to eq([max, sasha])
-      expect(application2.pets).to eq([sasha])
+      expect(application.list_pets).to eq([max, sasha])
+      expect(application2.list_pets).to eq([sasha])
     end
   end
 end
