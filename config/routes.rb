@@ -39,5 +39,5 @@ Rails.application.routes.draw do
 
   get '/applications/:application_id', to: 'applications#show'
   get '/applications', to: 'applications#index'
-  
+  patch '/applications/:application_id', to: 'applications#update'
 end

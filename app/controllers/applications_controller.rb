@@ -11,4 +11,8 @@ class ApplicationsController < ApplicationController
       @application = Application.find(params[:application_id])
     end
   end
+
+  def update
+    binding.pry
+  end
 end
