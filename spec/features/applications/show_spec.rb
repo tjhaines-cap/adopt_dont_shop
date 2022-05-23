@@ -44,7 +44,7 @@ RSpec.describe 'Applications Show Page' do
     expect(page).to have_content("Add a Pet to this Application")
     
     fill_in 'search', with: pet_2.name 
-    click_button"Find Pets"
+    click_button("Find Pets")
     expect(current_path).to eq("/applications/#{application.id}")
     
     expect(page).to have_content(pet_2.name)
@@ -61,7 +61,7 @@ RSpec.describe 'Applications Show Page' do
     
     expect(page).to have_content("Add a Pet to this Application")
     fill_in 'search', with: "Max" 
-    click_button"Find Pets"
+    click_button("Find Pets")
     expect(page).to_not have_content("Max")
     expect(page).to_not have_content(pet_2.name)
     expect(page).to_not have_content(pet_3.name)
@@ -71,5 +71,23 @@ RSpec.describe 'Applications Show Page' do
   
     visit "/applications/#{application2.id}"
     expect(page).to_not have_content("Add a Pet to this Application")
+  end
+
+  it 'can add pet to application from list of pets that appears after a namee is searched' do
+    application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111', description: 'I like animals!', status: 'In Progress')
+    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
+    pet_3 = Pet.create(adoptable: true, age: 2, breed: 'labrador', name: 'Lobster', shelter_id: shelter.id)
+    pet_4 = Pet.create(adoptable: true, age: 1, breed: 'chihuahua', name: 'Tiny', shelter_id: shelter.id)
+
+    visit "/applications/#{application.id}"
+    expect(page).to_not have_content("Lobster")
+    fill_in 'search', with: pet_2.name 
+    click_button("Find Pets")
+    expect(current_path).to eq("/applications/#{application.id}")
+    
+    click_button("Adopt this Pet")
+    expect(current_path).to eq("/applications/#{application.id}")
+    expect(page).to have_content("Lobster")
   end
 end
