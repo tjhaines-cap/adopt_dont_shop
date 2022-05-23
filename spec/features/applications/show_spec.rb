@@ -90,4 +90,23 @@ RSpec.describe 'Applications Show Page' do
     expect(current_path).to eq("/applications/#{application.id}")
     expect(page).to have_content("Lobster")
   end
+
+  it 'returns pets whose names are partial matches to the search' do
+    application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111', description: 'I like animals!', status: 'In Progress')
+    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Fluffy', shelter_id: shelter.id)
+    pet_3 = Pet.create(adoptable: true, age: 2, breed: 'labrador', name: 'Mr. Fluffers', shelter_id: shelter.id)
+    pet_4 = Pet.create(adoptable: true, age: 1, breed: 'chihuahua', name: 'Tiny', shelter_id: shelter.id)
+
+    visit "/applications/#{application.id}"
+    expect(page).to_not have_content("Fluffy")
+    expect(page).to_not have_content("Mr. Fluffers")
+
+    fill_in 'search', with: "fluf"
+    click_button("Find Pets")
+    expect(current_path).to eq("/applications/#{application.id}")
+    
+    expect(page).to have_content("Fluffy")
+    expect(page).to have_content("Mr. Fluffers")
+  end
 end
