@@ -12,11 +12,25 @@ class ApplicationsController < ApplicationController
     end
   end
 
+
   def update
-    # binding.pry
     selected_pet = Pet.find(params[:pet_id])
     application = Application.find(params[:application_id])
     ApplicationPet.create!(pet: selected_pet, application: application)
     redirect_to "/applications/#{params[:application_id]}"
+  end
+  
+  def new
+  end
+
+  def create
+    params[:address] = "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}"
+    app = Application.create!(application_params)
+    redirect_to "/applications/#{app.id}"
+  end
+
+  private
+  def application_params
+    params.permit(:name, :address, :description, :status)
   end
 end
