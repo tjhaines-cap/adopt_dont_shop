@@ -11,6 +11,12 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    Application.create(name: params[:name])
+    Application.create(artist_params)
+    redirect_to '/applications'
+  end
+
+  private
+  def artist_params
+    params.permit(:name, :address, :description, :status)
   end
 end
