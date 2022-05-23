@@ -11,9 +11,9 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    require "pry"; binding.pry
-    Application.create!(application_params)
-    redirect_to '/applications'
+    params[:address] = "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}"
+    app = Application.create!(application_params)
+    redirect_to "/applications/#{app.id}"
   end
 
   private

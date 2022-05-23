@@ -13,6 +13,6 @@
   <%= form.text_field :zip_code %>
   <%= form.label :description, 'Why would you make a good home?' %>
   <%= form.text_field :description %>
-  <% form.hidden_field :status, :value => params[:status => 'In Progress'] %>
+  <%= hidden_field_tag 'status', 'In Progress' %>
   <%= form.submit 'Submit' %>
 <% end %>
