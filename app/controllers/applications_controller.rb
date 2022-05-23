@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
   def index
     @applications = Application.all
   end
-  
+
   def show
     if params[:search].present?
       @pets = Pet.search(params[:search])
@@ -19,12 +19,16 @@ class ApplicationsController < ApplicationController
     ApplicationPet.create!(pet: selected_pet, application: application)
     redirect_to "/applications/#{params[:application_id]}"
   end
-  
+
   def new
   end
 
   def create
     params[:address] = "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}"
+    if params[:name] == "" || params[:street_address] == "" || params[:city] == "" || params[:state] == "" || params[:zip_code] == "" || params[:description] == ""
+      redirect_to "/applications/new"
+      return
+    end
     app = Application.create!(application_params)
     redirect_to "/applications/#{app.id}"
   end
