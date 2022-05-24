@@ -25,7 +25,7 @@ RSpec.describe 'Applications New Page' do
 
     click_on("Submit")
 
-    expect(current_path).to eq("/applications/new")
+    expect(current_path).to eq("/applications")
     expect(page).to have_content("Error submitting request, please fill in all fields")
   end
 end
