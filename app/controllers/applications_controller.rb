@@ -13,12 +13,12 @@ class ApplicationsController < ApplicationController
   end
 
 
-  def update
-    selected_pet = Pet.find(params[:pet_id])
-    application = Application.find(params[:application_id])
-    ApplicationPet.create!(pet: selected_pet, application: application)
-    redirect_to "/applications/#{params[:application_id]}"
-  end
+  # def update
+  #   selected_pet = Pet.find(params[:pet_id])
+  #   application = Application.find(params[:application_id])
+  #   ApplicationPet.create!(pet: selected_pet, application: application)
+  #   redirect_to "/applications/#{params[:application_id]}"
+  # end
   
   def new
   end
