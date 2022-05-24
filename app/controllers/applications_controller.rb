@@ -28,7 +28,6 @@ class ApplicationsController < ApplicationController
     app = Application.new(application_params)
     if app.save
       redirect_to "/applications/#{app.id}"
-      return
     else
       flash[:notice] = "Error submitting request, please fill in all fields"
       render :new
