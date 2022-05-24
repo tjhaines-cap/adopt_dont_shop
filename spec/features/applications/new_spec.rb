@@ -25,6 +25,7 @@ RSpec.describe 'Applications New Page' do
 
     click_on("Submit")
 
+    expect(page).to have_button("Submit")
     expect(page).to have_content("Error submitting request, please fill in all fields")
   end
 end
