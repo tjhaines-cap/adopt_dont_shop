@@ -25,12 +25,6 @@ class ApplicationsController < ApplicationController
 
   def create
     params[:address] = "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}"
-    # if params[:name] == "" || params[:street_address] == "" || params[:city] == "" || params[:state] == "" || params[:zip_code] == "" || params[:description] == ""
-    #   redirect_to "/applications/new"
-    #   return
-    # end
-    # app = Application.create!(application_params)
-    # redirect_to "/applications/#{app.id}"
     app = Application.new(application_params)
     if app.save
       redirect_to "/applications/#{app.id}"
