@@ -4,7 +4,9 @@
 ![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
 
 ### New database design
-![Screen Shot 2022-05-23 at 8 54 40 AM](https://user-images.githubusercontent.com/60715457/170375943-63f88ac9-16c5-4cfb-be38-5c9048405042.png)
+![Screen Shot 2022-05-25 at 3 41 20 PM](https://user-images.githubusercontent.com/60715457/170376271-060dc8c7-bd84-4861-999a-fdc2e8cc414c.png)
+
+
 
 ## Learning Goals
 
