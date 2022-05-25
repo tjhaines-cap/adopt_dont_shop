@@ -13,14 +13,12 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    selected_pet = Pet.find(params[:pet_id])
     application = Application.find(params[:application_id])
-    ApplicationPet.create!(pet: selected_pet, application: application)
-    redirect_to "/applications/#{params[:application_id]}"
+    application.update(application_params)
+    redirect_to "/applications/#{application.id}"
   end
 
-  def new
-  end
+  def new; end
 
   def create
     params[:address] = "#{params[:street_address]}, #{params[:city]}, #{params[:state]}, #{params[:zip_code]}"
@@ -28,12 +26,13 @@ class ApplicationsController < ApplicationController
     if app.save
       redirect_to "/applications/#{app.id}"
     else
-      flash[:notice] = "Error submitting request, please fill in all fields"
+      flash[:notice] = 'Error submitting request, please fill in all fields'
       render :new
     end
   end
 
   private
+
   def application_params
     params.permit(:name, :address, :description, :status)
   end

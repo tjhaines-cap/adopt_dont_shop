@@ -23,5 +23,16 @@
         <p><%= pet.shelter_name %></p>
       <% end %>
     <% end %>
+    
+    <% if !@application.list_pets.empty? %>
+      <h3>Submit My Application</h3>
+      <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+        <%= form.label :description, 'Why would you make a good home?' %>
+        <%= form.text_field :description %>
+        <%= hidden_field_tag 'status', 'Pending' %>
+        <%= form.submit 'Submit' %>
+      <% end %> 
+    <% end %> 
+  
   <% end %> 
 
