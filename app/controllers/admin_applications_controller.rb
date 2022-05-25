@@ -3,9 +3,7 @@ class AdminApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @pets_approved = []
     @pets_approved << params[:pet_id] if params[:pet_id]
-  end
-
-  def approve
-    redirect_to "/admin/applications/#{params[:id]}"
+    @pets_rejected = []
+    @pets_rejected << params[:pet_id] if params[:pet_id]
   end
 end
