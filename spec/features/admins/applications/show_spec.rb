@@ -20,12 +20,18 @@ RSpec.describe 'Admin Applications Show Page' do
       expect(page).to have_content('Max')
       expect(page).to have_button('Approve')
       expect(page).to_not have_content('Sasha')
+      click_button 'Approve'
+      expect(current_path).to eq("/admin/applications/#{application.id}")
+      expect(page).to_not have_button('Approve')
     end
 
     within('#pet-1') do
       expect(page).to have_content('Sasha')
       expect(page).to have_button('Approve')
       expect(page).to_not have_content('Max')
+      click_button 'Approve'
+      expect(current_path).to eq("/admin/applications/#{application.id}")
+      expect(page).to_not have_button('Approve')
     end
   end
 end
