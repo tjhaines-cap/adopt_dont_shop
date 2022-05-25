@@ -16,6 +16,11 @@ class Shelter < ApplicationRecord
       .order("pets_count DESC")
   end
 
+  def self.has_pending_application
+    pet_ids = Pet.joins(:applications).where("status = 'In Progress'").pluck(:id)
+    Shelter.joins(:pets).where('pets.id' => pet_ids)
+  end
+
   def pet_count
     pets.count
   end
