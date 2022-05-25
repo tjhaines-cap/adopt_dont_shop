@@ -23,6 +23,7 @@ RSpec.describe 'Admin Applications Show Page' do
       click_button 'Approve'
       expect(current_path).to eq("/admin/applications/#{application.id}")
       expect(page).to_not have_button('Approve')
+      expect(page).to have_content('Approved')
     end
 
     within('#pet-1') do
@@ -32,6 +33,7 @@ RSpec.describe 'Admin Applications Show Page' do
       click_button 'Approve'
       expect(current_path).to eq("/admin/applications/#{application.id}")
       expect(page).to_not have_button('Approve')
+      expect(page).to have_content('Approved')
     end
   end
 end
