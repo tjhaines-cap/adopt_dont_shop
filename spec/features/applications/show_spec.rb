@@ -104,6 +104,10 @@ RSpec.describe 'Applications Show Page' do
 
     visit "/applications/#{application.id}"
     expect(current_path).to eq("/applications/#{application.id}")
+
+    fill_in 'search', with: pet_3.name
+    click_button('Find Pets')
+    expect(current_path).to eq("/applications/#{application.id}")
     click_button(pet_3.id)
 
     fill_in 'description', with: 'Lots of love!'
