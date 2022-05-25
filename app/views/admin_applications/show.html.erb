@@ -5,10 +5,13 @@
   <% @application.list_pets.each_with_index do |pet, index| %>
     <div id="pet-<%= index %>">
       <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
-      <% if !@pets_approved.include?(pet.id.to_s) %>
-        <%= button_to 'Approve', "/admin/applications/#{@application.id}", method: :get, params: {pet_id: pet.id} %>
-      <% else %>
+      <% if !@pets_approved.include?(pet.id.to_s) && !@pets_rejected.include?(pet.id.to_s) %>
+        <%= button_to 'Approve', "/admin/applications/#{@application.id}", method: :get, params: {pet_id: pet.id, approved: true} %>
+        <%= button_to 'Reject', "/admin/applications/#{@application.id}", method: :get, params: {pet_id: pet.id, approved: false} %>
+      <% elsif @pets_approved.include?(pet.id.to_s) %>
         <p>Approved</p>
+      <% elsif @pets_rejected.include?(pet.id.to_s) %>
+        <p>Rejected</p>
       <% end %>
     </div>
   <% end %>
