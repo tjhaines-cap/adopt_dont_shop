@@ -19,4 +19,13 @@ RSpec.describe 'Applications New Page' do
     expect(page).to have_content('In Progress')
     expect(page).to have_content('Lots of love!')
   end
+
+  it "sends error message when form isn't complete" do
+    visit "/applications/new"
+
+    click_on("Submit")
+
+    expect(page).to have_button("Submit")
+    expect(page).to have_content("Error submitting request, please fill in all fields")
+  end
 end
