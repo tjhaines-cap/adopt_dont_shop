@@ -75,7 +75,7 @@ RSpec.describe 'Applications Show Page' do
     expect(page).to_not have_content('Add a Pet to this Application')
   end
 
-  xit 'can add pet to application from list of pets that appears after a name is searched' do
+  it 'can add pet to application from list of pets that appears after a name is searched' do
     application = Application.create!(name: 'Jenn', address: '123 Water Street, Denver, CO, 80111',
                                       description: 'I like animals!', status: 'In Progress')
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
