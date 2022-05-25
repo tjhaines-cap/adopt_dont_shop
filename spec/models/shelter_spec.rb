@@ -29,6 +29,7 @@ RSpec.describe Shelter, type: :model do
                                         description: 'Happy home', status: 'In Progress')
      
     ApplicationPet.create!(pet: @pet_1, application: @application)
+    ApplicationPet.create!(pet: @pet_2, application: @application)
     ApplicationPet.create!(pet: @pet_3, application: @application2)
   end
 
