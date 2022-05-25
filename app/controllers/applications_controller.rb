@@ -12,7 +12,6 @@ class ApplicationsController < ApplicationController
     end
   end
 
-
   def update
     selected_pet = Pet.find(params[:pet_id])
     application = Application.find(params[:application_id])

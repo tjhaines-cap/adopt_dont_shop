@@ -15,7 +15,7 @@
 
     <% if @pets %>
       <% @pets.each do |pet| %>
-        <h3><%= pet.name %></h3><%= button_to "Adopt this Pet", "/applications/#{@application.id}", id: pet.id, method: :patch, params: {pet_id: pet.id} %>
+        <h3><%= pet.name %></h3><%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets", id: pet.id, method: :post, params: {pet_id: pet.id} %>
 
         <p><%= pet.age %> years old</p>
         <p><%= pet.breed %></p>
